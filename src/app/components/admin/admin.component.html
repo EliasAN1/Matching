@@ -1,0 +1,199 @@
+<button class="Btn create" (click)="update()">{{ status }}</button>
+<button
+  class="Btn create"
+  *ngIf="addingexercise"
+  (click)="QuitAddingExercisesState()"
+  style="margin-left: 10px"
+>
+  Quit adding exercises
+</button>
+
+<div class="saved-data-div" *ngIf="state == 'viewing'">
+  <div class="search">
+    <div>
+      <label for="search">Search:</label>
+      <input
+        type="text"
+        id="search"
+        placeholder="Search Username"
+        (ngModelChange)="search()"
+        [(ngModel)]="searchInput"
+      />
+    </div>
+  </div>
+  <ul class="saved-data-list">
+    <li class="title-li">
+      <p style="width: 15vw">Username</p>
+      <p style="width: 20vw">Email</p>
+      <p style="width: 14vw">Registered</p>
+      <p style="width: 14vw">Last login</p>
+      <p style="width: 14vw">Last updated password</p>
+      <p style="width: 14vw">Last recovery request</p>
+      <p style="width: 5vw">Admin</p>
+    </li>
+    <div *ngFor="let user of usersData" class="li-div">
+      <li class="looped-li">
+        <p
+          class="paragraph"
+          *ngIf="!addingexercise"
+          (click)="edit(user)"
+          style="width: 15vw"
+        >
+          {{ user.username }}
+        </p>
+        <p
+          class="paragraph"
+          *ngIf="addingexercise"
+          (click)="AddExercise(user.username)"
+          style="width: 15vw"
+        >
+          {{ user.username }}
+        </p>
+        <p style="border-left: 1px solid white; width: 20vw">
+          {{ user.email }}
+        </p>
+        <p style="border-left: 1px solid white; width: 14vw">
+          {{ user.registered }}
+        </p>
+        <p style="border-left: 1px solid white; width: 14vw">
+          {{ user.lastlogin }}
+        </p>
+        <p style="border-left: 1px solid white; width: 14vw">
+          {{ user.last_pass_update }}
+        </p>
+        <p style="border-left: 1px solid white; width: 14vw">
+          {{ user.last_recovery_request }}
+        </p>
+        <p style="border-inline: 1px solid white; width: 5vw">
+          {{ user.admin }}
+        </p>
+      </li>
+    </div>
+    <p *ngIf="!FoundUser" style="text-align: center; cursor: default">
+      No Users were found
+    </p>
+    <div *ngIf="FoundUser">
+      <h2 style="margin-bottom: 5px">Create User</h2>
+      <li class="looped-li">
+        <input
+          type="text"
+          class="Create-account-input"
+          placeholder="Username"
+          [(ngModel)]="usernameCreation"
+        />
+        <input
+          class="Create-account-input"
+          placeholder="Email"
+          [(ngModel)]="emailCreation"
+        />
+        <input
+          type="password"
+          class="Create-account-input"
+          placeholder="Password"
+          [(ngModel)]="passwordCreation"
+        />
+        <button class="Btn create" (click)="createUser()">
+          {{ createBtn }}
+        </button>
+      </li>
+    </div>
+  </ul>
+</div>
+
+<div class="saved-data-div" *ngIf="state == 'editing'">
+  <h1>Editing {{ Editing }}</h1>
+  <div class="wrapper-editing" *ngFor="let user of UserData">
+    <div class="container-editing">
+      <div class="blocks-editing" *ngIf="EditingWhat != 'username'">
+        <p class="textp">Username:</p>
+        <p class="textp">{{ user.username }}</p>
+        <p class="editBtn" (click)="editData('username')">| Edit</p>
+      </div>
+      <div class="blocks-editing" *ngIf="EditingWhat == 'username'">
+        <p class="textp">Username:</p>
+        <input
+          type="text"
+          style="margin-block: 17px; margin-right: 5px"
+          [(ngModel)]="newuser"
+        />
+        <p class="editBtn" (click)="changeUserData('username', user.username)">
+          | Sumbit
+        </p>
+        <p class="editBtn" (click)="changeUserData('cancel', '')">| Cancel</p>
+      </div>
+
+      <div class="blocks-editing" *ngIf="EditingWhat != 'email'">
+        <p class="textp">Email:</p>
+        <p class="textp">{{ user.email }}</p>
+        <p class="editBtn" (click)="editData('email')">| Edit</p>
+      </div>
+      <div class="blocks-editing" *ngIf="EditingWhat == 'email'">
+        <p class="textp">Email:</p>
+        <input
+          type="text"
+          style="margin-block: 17px; margin-right: 5px"
+          [(ngModel)]="newemail"
+        />
+        <p class="editBtn" (click)="changeUserData('email', user.email)">
+          | Sumbit
+        </p>
+        <p class="editBtn" (click)="changeUserData('cancel', '')">| Cancel</p>
+      </div>
+
+      <div class="blocks-editing">
+        <p class="textp">Change password:</p>
+        <input
+          type="text"
+          style="margin-block: 17px; margin-right: 5px"
+          [(ngModel)]="newpass"
+        />
+        <p class="editBtn" (click)="changeUserData('password', '')">| Sumbit</p>
+      </div>
+
+      <div class="blocks-editing">
+        <p class="textp">Registered at:</p>
+        <p class="textp">{{ user.registered }}</p>
+      </div>
+      <div class="blocks-editing">
+        <p class="textp">Last login at:</p>
+        <p class="textp">{{ user.lastlogin }}</p>
+      </div>
+      <div class="blocks-editing">
+        <p class="textp">Last password update at:</p>
+        <p class="textp">{{ user.last_pass_update }}</p>
+      </div>
+      <div class="blocks-editing">
+        <p class="textp">Last recovery requested at:</p>
+        <p class="textp">{{ user.last_recovery_request }}</p>
+      </div>
+      <div class="blocks-editing">
+        <p class="textp">Admin:</p>
+        <p>{{ user.admin }}</p>
+        <p class="editBtn" (click)="changeUserData('admin', user.admin)">
+          | {{ adminChange }}
+        </p>
+      </div>
+      <div class="blocks-editing">
+        <p class="editBtn" (click)="changeUserData('delete', user.username)">
+          Delete user
+        </p>
+      </div>
+      <button class="Btn" (click)="goBack()">Finished</button>
+    </div>
+    <div class="container-exercises">
+      <h2>Exercises</h2>
+      <div class="blocks-editing" *ngFor="let exercise of user.exercises">
+        <p class="textp">{{ exercise[0] }}</p>
+        <p class="editBtn" (click)="changeUserData('exercise', exercise[0])">
+          | Delete
+        </p>
+        <p
+          class="editBtn"
+          (click)="AddingExercisesState([exercise[0], user.username])"
+        >
+          | Add table to
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

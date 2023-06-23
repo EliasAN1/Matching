@@ -1,0 +1,163 @@
+body {
+  background-color: rgb(63, 63, 63);
+}
+h1 {
+  margin: 0px;
+  text-align: center;
+  color: wheat;
+}
+#add-question-div {
+  text-align: center;
+  margin: auto;
+  margin-top: 50px;
+  width: fit-content;
+  outline: 4px white solid;
+  padding: 20px;
+}
+#save-option-div {
+  border-bottom: 4px rgb(0, 0, 0) solid;
+}
+
+#save-option-div div {
+  margin: 20px;
+  margin-top: 0px;
+}
+
+input {
+  width: 200px;
+  height: 15px;
+  font-size: 15px;
+  background-color: transparent;
+  color: white;
+  outline: 3px black solid;
+  border: 0px;
+  opacity: 0.7;
+  transition: 0.2s;
+  padding: 5px;
+  margin: 5px;
+}
+input::placeholder {
+  color: white;
+  text-align: center;
+}
+input:focus {
+  outline: 2px white solid;
+  opacity: 1;
+}
+
+.mp {
+  outline: 0px;
+  margin-top: 10px;
+}
+.mp:focus {
+  outline: 0px;
+}
+
+.en {
+  height: 10px;
+  outline: 2px black solid;
+}
+#button-div {
+  text-align: center;
+}
+
+.btn {
+  color: white;
+  margin: 20px;
+  margin-bottom: 0px;
+  padding: 10px;
+  width: 120px;
+  background-color: transparent;
+  font-size: 13px;
+  font-weight: bolder;
+  border: 3px rgb(255, 255, 255) solid;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  opacity: 1;
+  border-color: white;
+  cursor: pointer;
+}
+
+#add-question-form-div {
+  max-height: 50vh;
+  overflow-y: hidden;
+}
+
+#add-question-form-div div {
+  border-bottom: 2px white solid;
+  justify-content: center;
+}
+.question {
+  width: 30vw;
+  margin-right: 10px;
+}
+#add-question-form-div div input {
+  display: inline-flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+}
+
+@media only screen and (max-width: 760px) {
+  .question {
+    width: 70vw;
+  }
+  #add-question-form-div div input {
+    display: inline-flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  #add-question-form-div {
+    max-height: 70vh;
+  }
+  #button-div > div {
+    display: inline-flex;
+    flex-direction: column-reverse;
+
+    margin-top: 20px;
+  }
+
+  .btn {
+    margin: 10px;
+  }
+}
+
+/* For webkit-based browsers */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: wheat;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  background-color: #fcfcfc;
+}
+
+/* For Firefox */
+::-moz-scrollbar {
+  display: none;
+}
+
+::-moz-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-moz-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+::-moz-scrollbar-button {
+  display: none;
+  background-color: #555;
+}

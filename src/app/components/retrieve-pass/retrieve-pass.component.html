@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 style="cursor: default">RECOVER USER</h1>
+
+  <div class="inputs">
+    <div>
+      <label for="email">Email</label>
+      <input
+        #emailin
+        id="email"
+        type="text"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="Your Email"
+      />
+    </div>
+  </div>
+  <div class="buttons">
+    <button (click)="sendEmail()" class="logBtn">{{ SendEmailBtnText }}</button>
+  </div>
+  <div class="footer">
+    <button
+      [ngClass]="{
+        h4Btn: true,
+        active: currentseleciton == 'username'
+      }"
+      [disabled]="currentseleciton == 'username'"
+      (click)="retrieveWhat('username')"
+    >
+      Recover my Username
+    </button>
+    <button
+      [ngClass]="{
+        h4Btn: true,
+        active: currentseleciton == 'password'
+      }"
+      [disabled]="currentseleciton == 'password'"
+      (click)="retrieveWhat('password')"
+    >
+      Recover my Password
+    </button>
+  </div>
+</div>

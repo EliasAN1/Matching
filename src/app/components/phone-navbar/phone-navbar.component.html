@@ -1,0 +1,76 @@
+<div class="container-closed">
+  <div *ngIf="loggedin === false">
+    <button
+      [ngClass]="{
+        logsign: true,
+
+        active: currentRoute === '/login'
+      }"
+      (click)="navigate('/login')"
+    >
+      Login
+    </button>
+    <button
+      [ngClass]="{
+        logsign: true,
+
+        active: currentRoute === '/sign-up'
+      }"
+      (click)="navigate('/sign-up')"
+    >
+      Sign up
+    </button>
+  </div>
+  <div class="welcome" *ngIf="loggedin">Welcome {{ username }}</div>
+  <div #hamicon class="container" (click)="openNav()">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div #pages class="pages">
+      <div>
+        <button
+          [ngClass]="{
+            'a-link-nav': true,
+            active: currentRoute === '/'
+          }"
+          (click)="navigate('/')"
+        >
+          Home
+        </button>
+        <button
+          [ngClass]="{
+            'a-link-nav': true,
+            active: currentRoute === '/create-exercise'
+          }"
+          (click)="navigate('/create-exercise')"
+        >
+          Create exercise
+        </button>
+        <button
+          *ngIf="loggedin"
+          [ngClass]="{
+            'a-link-nav': true,
+            active: currentRoute === '/saved-exercises'
+          }"
+          (click)="navigate('/saved-exercises')"
+        >
+          Saved exercises
+        </button>
+        <button
+          [ngClass]="{
+            'a-link-nav': true,
+            active: currentRoute === '/public-exercises'
+          }"
+          (click)="navigate('/public-exercises')"
+        >
+          Public exercises
+        </button>
+      </div>
+      <div>
+        <button class="a-link-nav butt" *ngIf="loggedin" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

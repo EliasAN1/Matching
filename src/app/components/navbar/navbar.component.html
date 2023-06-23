@@ -1,0 +1,81 @@
+<div class="nav-bar">
+  <nav class="n0">
+    <button
+      [ngClass]="{
+        'a-link-nav': true,
+        active: currentRoute === '/'
+      }"
+      (click)="navigate('/')"
+    >
+      Home
+    </button>
+    <button
+      [ngClass]="{
+        'a-link-nav': true,
+        active: currentRoute === '/create-exercise'
+      }"
+      (click)="navigate('/create-exercise')"
+    >
+      Create exercise
+    </button>
+    <button
+      *ngIf="loggedin"
+      [ngClass]="{
+        'a-link-nav': true,
+        active: currentRoute === '/saved-exercises'
+      }"
+      (click)="navigate('/saved-exercises')"
+    >
+      Saved exercises
+    </button>
+    <button
+      [ngClass]="{
+        'a-link-nav': true,
+        active: currentRoute === '/public-exercises'
+      }"
+      (click)="navigate('/public-exercises')"
+    >
+      Public exercises
+    </button>
+  </nav>
+  <nav *ngIf="loggedin === false" class="n1">
+    <button
+      [ngClass]="{
+        'a-link-nav': true,
+        active: currentRoute === '/login'
+      }"
+      (click)="navigate('/login')"
+    >
+      Login
+    </button>
+    <button
+      [ngClass]="{
+        'a-link-nav': true,
+        active: currentRoute === '/sign-up'
+      }"
+      (click)="navigate('/sign-up')"
+    >
+      Sign up
+    </button>
+  </nav>
+  <nav *ngIf="loggedin === true" class="n1">
+    <div class="profile-container">
+      <div class="profile-container" (click)="displayList()">
+        <div #pointerContainer class="pointer-container opened">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+        </div>
+        <a class="welcome">Welcome {{ username }}</a>
+      </div>
+      <div #profileWrapper class="profile-list-wrapper">
+        <div class="profile-list-container">
+          <a class="a-link-nav" (click)="navigate('/user')">My account</a>
+          <a class="a-link-nav">Friends</a>
+          <a class="a-link-nav">Messages</a>
+          <a class="a-link-nav">Report to us</a>
+        </div>
+      </div>
+    </div>
+    <button class="a-link-nav" (click)="logout()">Logout</button>
+  </nav>
+</div>

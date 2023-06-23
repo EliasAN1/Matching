@@ -1,0 +1,23 @@
+<div class="container">
+  <div>
+    <h1 style="cursor: default">RESET PASSWORD</h1>
+    <div class="inputs">
+      <div>
+        <label for="oldpassword">Current password</label>
+        <input
+          #oldpasswordin
+          id="oldpassword"
+          type="password"
+          [(ngModel)]="oldpass"
+          name="oldpassword"
+          placeholder="Current password"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+    <div class="buttons">
+      <button (click)="sendemail()" class="logBtn">{{ sumbitBtnText }}</button>
+    </div>
+    <div class="footer"></div>
+  </div>
+</div>

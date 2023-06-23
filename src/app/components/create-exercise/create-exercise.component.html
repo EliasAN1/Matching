@@ -1,0 +1,71 @@
+<div id="add-question-div">
+  <h1 style="cursor: default">ADDING QUESTIONS</h1>
+  <div
+    style="
+      border-bottom: 4px white solid;
+      justify-content: space-around;
+      display: flex;
+    "
+  >
+    <div>
+      <label for="exercise-name" style="color: white">Exercise name: </label>
+      <input
+        style="margin-block: 10px"
+        type="text"
+        class="en"
+        id="exercise-name"
+        placeholder="Exercise name"
+        [(ngModel)]="exercise_name"
+        #exercise_name_input
+      />
+    </div>
+    <div>
+      <label for="public-exercise" style="color: white">Make public: </label>
+      <input
+        style="width: 20px"
+        type="checkbox"
+        class="mp"
+        id="public-exercise"
+        [(ngModel)]="public"
+      />
+    </div>
+  </div>
+
+  <div #addQuestionFormDiv id="add-question-form-div">
+    <div *ngFor="let input of inputs">
+      <input
+        [(ngModel)]="input.question"
+        type="text"
+        class="question"
+        placeholder="Enter your quesiton"
+        autocomplete="off"
+      />
+      <input
+        [(ngModel)]="input.questionOrder"
+        type="text"
+        class="question-order"
+        placeholder="Enter the answer"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+
+  <div id="button-div">
+    <div style="display: inline-flex">
+      <div id="finishdiv">
+        <button class="btn" id="finish" (click)="FinishedClickSave()">
+          Finish & save
+        </button>
+        <button class="btn" id="finish" (click)="FinishedClick()">
+          Finish
+        </button>
+      </div>
+      <div id="addremovediv">
+        <button class="btn" id="remove-child" (click)="DeleteLastForm()">
+          -
+        </button>
+        <button class="btn" id="sumbit" (click)="AddNewForm()">+</button>
+      </div>
+    </div>
+  </div>
+</div>

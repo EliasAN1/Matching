@@ -1,0 +1,28 @@
+<h1 id="exercise-name-display">Exercise</h1>
+<div id="exersice-questions-div">
+  <div
+    *ngFor="let line of Lines"
+    class="exercise-container"
+    [ngClass]="{
+      correct: line.result === 'Correct answer',
+      false: line.result !== '' && line.result !== 'Correct answer'
+    }"
+  >
+    <p #question [innerHTML]="line.question"></p>
+    <div class="select-result">
+      <p [innerHTML]="line.result"></p>
+      <select #answer>
+        <option
+          *ngFor="let option of options"
+          [value]="option"
+          [innerHTML]="option"
+        ></option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="div-btn">
+  <button id="restart" (click)="shuffleAgain()">Repeat</button>
+
+  <button id="check-answers" (click)="checkAnswers()">Check answers</button>
+</div>

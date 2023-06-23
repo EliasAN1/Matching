@@ -1,0 +1,116 @@
+h1 {
+  color: wheat;
+  text-align: center;
+  margin-top: 0px;
+}
+h4 {
+  color: #f5deb3;
+}
+
+.container {
+  margin: auto;
+  margin-top: 20vh;
+  width: fit-content;
+  padding: 10px;
+  padding-inline: 50px;
+  outline: 2px black solid;
+}
+
+.inputs {
+  justify-content: space-between;
+  display: flex;
+  margin-bottom: 20px;
+  width: 300px;
+  color: wheat;
+}
+
+input {
+  display: block;
+  padding: 5px;
+
+  width: 2 00px;
+  height: 15px;
+  font-size: 15px;
+
+  background-color: transparent;
+  color: white;
+
+  border: 0px;
+  outline: 2px black solid;
+
+  opacity: 0.7;
+  transition: 0.5s;
+}
+input::placeholder {
+  color: white;
+  text-align: center;
+}
+input:focus {
+  outline: 2px white solid;
+  opacity: 1;
+}
+
+.remember-div {
+  margin-bottom: 0px;
+  display: flex;
+}
+
+.remember-div label {
+  margin-right: 20px;
+  color: wheat;
+}
+
+.remember-div input {
+  outline: 0px;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.logBtn {
+  background-color: transparent;
+  color: white;
+  border: 2px black solid;
+
+  font-size: 14px;
+  font-weight: bolder;
+
+  margin-top: 20px;
+  margin-bottom: 0px;
+  padding: 5px;
+  width: 160px;
+
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+.logBtn:hover {
+  opacity: 1;
+  border-color: white;
+  cursor: pointer;
+}
+
+.footer {
+  text-align: center;
+}
+
+.h4Btn {
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: inherit;
+  color: #f5deb3;
+  background-color: transparent;
+  border: 0px;
+  font-weight: bold;
+}
+
+.h4Btn:hover {
+  color: white;
+}
+
+@media only screen and (max-width: 760px) {
+  .container {
+    padding-inline: 30px;
+  }
+}

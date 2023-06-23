@@ -1,0 +1,77 @@
+<input
+  #imageuploader
+  type="file"
+  style="display: none"
+  (change)="editImage($event)"
+  accept="image/*"
+  name="image"
+/>
+<div class="wrraper">
+  <div class="container">
+    <div class="block">
+      <div
+        style="position: relative; cursor: pointer"
+        (mouseenter)="showEdit()"
+        (mouseleave)="showEdit()"
+        (click)="openFileUploader()"
+      >
+        <img
+          #image
+          [src]="'https://i.imgur.com/tdi3NGa.png'"
+          alt=""
+          height="50px"
+          width="50px"
+        />
+        <p #editImg class="edit-img">Edit</p>
+      </div>
+      <p style="padding: 7.1px; margin-bottom: 0px">{{ user }}</p>
+    </div>
+    <div class="info-div">
+      <div>
+        <p>Username: {{ user }}</p>
+        <p>Email: {{ email }}</p>
+
+        <div style="display: flex; flex-direction: column">
+          <button class="Btn" (click)="navigate('/reset-pass')">
+            Change password
+          </button>
+        </div>
+        <p>Registered: {{ Registered }}</p>
+      </div>
+      <div>
+        <p>Last login: {{ Lastlogin }}</p>
+        <p>Last updated password: {{ Lastupdatedpassword }}</p>
+        <p>Last successfull recovery: {{ lastsuccessrecovery }}</p>
+        <p>Last recovery request: {{ Lastrecoveryrequest }}</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="hover-p" style="margin-top: 0px">Blocked</p>
+      <ul class="friends-list">
+        <p style="margin: 0px; margin-bottom: 20px; text-align: center">
+          Friends
+        </p>
+        <div class="friends" *ngFor="let friend of friends">
+          <button class="friends-Btn" style="cursor: pointer">
+            <div class="block">
+              <div class="inner-block">
+                <img src="{{ friend[1] }}" />
+                <p>{{ friend[0] }}</p>
+              </div>
+            </div>
+          </button>
+          <div class="inner-block">
+            <p class="hover-p">Chat</p>
+            <p class="hover-p">Unfriend</p>
+            <p class="hover-p">Block</p>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <!-- <div class="Btn-div">
+      <button class="Btn">Add friend</button>
+      <button class="Btn">Block</button>
+    </div> -->
+  </div>
+</div>

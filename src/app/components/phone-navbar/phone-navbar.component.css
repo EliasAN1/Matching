@@ -1,0 +1,100 @@
+.container-closed {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  display: block;
+  cursor: pointer;
+}
+.bar1,
+.bar2,
+.bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  transform: translate(0, 11px) rotate(-45deg);
+  background-color: wheat;
+}
+
+.change .bar2 {
+  opacity: 0;
+  background-color: wheat;
+}
+
+.change .bar3 {
+  transform: translate(0, -11px) rotate(45deg);
+  background-color: wheat;
+}
+
+.pages {
+  display: none;
+  position: absolute;
+  transition: initial; /* Reset inherited transition properties */
+  background-color: rgb(63, 63, 63);
+  width: 70vw;
+  height: 70vh;
+  transform: translateX(-60vw);
+  transition: transform 0.5s ease-in-out;
+  text-align: left;
+  z-index: 1;
+  border-bottom: 2px black solid;
+  border-left: 2px black solid;
+}
+.open {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 
+ */
+
+.a-link-nav {
+  text-align: left;
+  display: block;
+  color: black;
+  background-color: transparent;
+  border: 0px;
+  border-bottom: 1px black solid;
+  padding: 10px;
+  margin: auto;
+  width: 70vw;
+  font-weight: bolder;
+}
+.butt {
+  border: 0px;
+  border-top: 1px black solid;
+}
+
+.welcome {
+  color: wheat;
+  font-size: 17px;
+  font-weight: bolder;
+  padding: 10px;
+}
+
+.logsign {
+  color: black;
+  background-color: transparent;
+  border: 0px;
+  padding: 10px;
+  margin-inline-end: 5px;
+  font-size: 17px;
+  font-weight: bolder;
+}
+
+.logsign .active {
+  color: wheat;
+}
+
+.active {
+  color: wheat;
+  opacity: 1;
+  pointer-events: none;
+}

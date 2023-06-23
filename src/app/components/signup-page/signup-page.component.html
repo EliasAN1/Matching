@@ -1,0 +1,59 @@
+<div class="container">
+  <h1 style="cursor: default">REGISTER</h1>
+
+  <div class="inputs">
+    <div>
+      <label for="email">Email</label>
+      <input
+        #emailin
+        type="email"
+        id="email"
+        placeholder="Your Email"
+        [(ngModel)]="email"
+      />
+    </div>
+    <div>
+      <label for="user">User name</label>
+      <input
+        #userin
+        type="text"
+        id="user"
+        placeholder="Your Name"
+        [(ngModel)]="userName"
+      />
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input
+        #passwordin
+        type="password"
+        id="password"
+        placeholder="Passowrd"
+        [(ngModel)]="password"
+      />
+    </div>
+
+    <div>
+      <label for="Confirm-password">Confirm</label>
+      <input
+        #conpasswordin
+        type="password"
+        id="Confirm-password"
+        placeholder="Confirm passowrd"
+        [(ngModel)]="conPassword"
+      />
+    </div>
+  </div>
+  <div class="buttons">
+    <button (click)="Register()" (keyup.enter)="Register()" class="logBtn">
+      {{ RegisterBtnText }}
+    </button>
+  </div>
+  <div class="footer">
+    <h4>
+      Already a user ? <button class="h4Btn" (click)="navigate()">Login</button>
+    </h4>
+    <p style="color: white">**User name is case sensitive**</p>
+  </div>
+</div>

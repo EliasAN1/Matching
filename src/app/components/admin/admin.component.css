@@ -1,0 +1,274 @@
+h1 {
+  color: wheat;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: wheat;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.search {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 10vh;
+}
+
+label {
+  color: wheat;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+input {
+  padding: 5px;
+
+  width: 200px;
+  height: 10px;
+  font-size: 15px;
+
+  background-color: transparent;
+  color: white;
+
+  border: 0px;
+  outline: 2px black solid;
+
+  opacity: 0.7;
+  transition: 0.5s;
+}
+input::placeholder {
+  color: white;
+  text-align: center;
+}
+input:focus {
+  outline: 2px white solid;
+  opacity: 1;
+}
+
+.Create-account-input-checkbox {
+  outline: 0px;
+}
+
+.saved-data-div {
+  display: block;
+  text-align: center;
+}
+
+.saved-data-list {
+  width: 70vw;
+  color: white;
+  outline: 2px white solid;
+  font-size: 17px;
+  padding: 30px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.title-li {
+  display: flex;
+  justify-content: space-between;
+}
+.title-li p {
+  color: wheat;
+  margin: 0px;
+  width: 16.66667vw;
+  font-size: 1vw;
+  text-align: center;
+  cursor: default;
+}
+
+.li-div {
+  border-top: 2px white solid;
+  border-bottom: 2px white solid;
+  margin-top: 20px;
+}
+
+.looped-li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  cursor: default;
+}
+.looped-li p {
+  font-size: 1vw;
+  text-align: center;
+  padding: 5px;
+  overflow-y: auto;
+}
+
+.paragraph {
+  border-left: 1px solid white;
+  cursor: pointer;
+}
+
+.paragraph:hover {
+  color: wheat;
+}
+
+/* For webkit-based browsers */
+::-webkit-scrollbar {
+  height: 0px;
+}
+
+::-webkit-scrollbar-track {
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 0px;
+}
+
+::-webkit-scrollbar-button {
+  height: 0px;
+}
+
+/* For Firefox */
+::-moz-scrollbar {
+  height: 0px;
+}
+
+::-moz-scrollbar-track {
+  height: 0px;
+}
+
+::-moz-scrollbar-thumb {
+  height: 0px;
+}
+
+::-moz-scrollbar-button {
+  height: 0px;
+}
+
+.wrapper-editing {
+  display: inline-flex;
+  justify-content: space-between;
+  border: 4px solid white;
+  height: 90vh;
+  width: 70vw;
+  margin: auto;
+}
+
+.container-editing {
+  display: grid;
+  height: 90vh;
+  width: 35vw;
+}
+
+.container-exercises {
+  display: grid;
+  height: 90vh;
+  width: 35vw;
+  border-left: 1px solid white;
+}
+
+.blocks-editing {
+  display: inline-flex;
+  margin-left: 10px;
+}
+.textp {
+  color: white;
+  font-size: 17px;
+  display: inline-flex;
+  margin-right: 10px;
+}
+
+.editBtn {
+  color: wheat;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.editBtn:hover {
+  color: aqua;
+}
+
+.Btn {
+  background-color: transparent;
+  color: white;
+  border: 2px black solid;
+
+  font-size: 14px;
+  font-weight: bolder;
+
+  margin: auto;
+  padding: 5px;
+  width: 160px;
+
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+.Btn:hover {
+  opacity: 1;
+  border-color: white;
+  outline-color: white;
+  cursor: pointer;
+}
+
+.create {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  outline: 2px black solid;
+  height: 20px;
+}
+
+@media only screen and (max-width: 760px) {
+  .search {
+    width: 150vw;
+  }
+
+  .saved-data-list {
+    width: fit-content;
+    color: white;
+    outline: 2px white solid;
+    font-size: 17px;
+    padding: 30px;
+    margin: auto;
+    margin-top: 20px;
+  }
+  .title-li p {
+    color: wheat;
+    margin: 0px;
+    width: 16.66667vw;
+    font-size: 2.2vw;
+    text-align: center;
+    cursor: default;
+  }
+  .looped-li p {
+    margin: 0px;
+    font-size: 2.2vw;
+    text-align: center;
+    cursor: default;
+  }
+  .wrapper-editing {
+    display: inline-flex;
+    justify-content: space-between;
+    border: 4px solid white;
+    height: 90vh;
+    width: fit-content;
+    margin: auto;
+  }
+  .container-editing {
+    display: grid;
+    height: 90vh;
+    width: fit-content;
+  }
+  .container-exercises {
+    display: grid;
+    height: 90vh;
+    width: fit-content;
+    border-left: 1px solid white;
+    padding: 35px;
+    overflow-y: auto;
+  }
+  .Create-account-input {
+    width: 150px;
+    margin-right: 10px;
+  }
+  .create {
+    width: 100px;
+    font-size: small;
+  }
+}

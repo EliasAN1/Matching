@@ -1,0 +1,64 @@
+<div class="container">
+  <div *ngIf="dataModKind == ''">
+    <h1 style="cursor: default">AUTHENTICATION</h1>
+    <div class="inputs">
+      <div>
+        <label for="code">Code</label>
+        <input
+          #codein
+          id="code"
+          type="text"
+          [(ngModel)]="code"
+          name="code"
+          placeholder="Code"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+    <div class="buttons">
+      <button (click)="checkCode()" class="logBtn">{{ SumbitBtnText }}</button>
+    </div>
+    <div class="footer"></div>
+  </div>
+
+  <div *ngIf="dataModKind == 'user'">
+    <h1 style="cursor: default">YOUR USERNAME</h1>
+    <p style="color: white; font-size: 20px; text-align: center">{{ user }}</p>
+  </div>
+
+  <div *ngIf="dataModKind == 'password'">
+    <h1 style="cursor: default">CHANGE PASSWORD</h1>
+    <div class="inputs">
+      <div>
+        <label for="newpass">New pass</label>
+        <input
+          #passwordin
+          id="newpass"
+          type="password"
+          [(ngModel)]="newpassword"
+          name="username"
+          placeholder="New password"
+          autocomplete="off"
+        />
+      </div>
+      <div>
+        <label for="conpass">Confirm</label>
+        <input
+          #conpasswordin
+          id="conpass"
+          type="password"
+          [(ngModel)]="conpass"
+          name="username"
+          placeholder="Confirm password"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+    <div class="buttons">
+      <button (click)="sendchanges()" class="logBtn">
+        {{ SumbitPassChangeBtnText }}
+      </button>
+    </div>
+    <div class="footer"></div>
+  </div>
+</div>

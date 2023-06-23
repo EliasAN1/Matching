@@ -1,0 +1,30 @@
+<h1 style="cursor: default">PUBLIC EXERCISES</h1>
+<div id="saved-data-div">
+  <h2 id="saved-not-found" *ngIf="!FoundExercises">
+    {{ PublicExercisesText }}
+  </h2>
+  <div *ngIf="FoundExercises">
+    <div class="search">
+      <label for="search">Search:</label>
+      <input
+        type="text"
+        placeholder="Search exercise"
+        (ngModelChange)="search()"
+        [(ngModel)]="searchInput"
+      />
+      <button class="h4Btn" (click)="search('change')">
+        By {{ currentseleciton }}
+      </button>
+    </div>
+    <ul id="saved-data-list">
+      <div *ngFor="let publicExercise of publicExercises" id="li-div">
+        <li *ngIf="searchResultFound" (click)="loadExercise(publicExercise)">
+          {{ publicExercise.exerciseName }} - - - by {{ publicExercise.user }}
+        </li>
+      </div>
+      <p *ngIf="!searchResultFound" style="text-align: center; cursor: default">
+        No results were found
+      </p>
+    </ul>
+  </div>
+</div>

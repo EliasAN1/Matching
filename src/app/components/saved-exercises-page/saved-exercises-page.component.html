@@ -1,0 +1,49 @@
+<h1 style="cursor: default">SAVED EXERCISES</h1>
+<div id="saved-data-div">
+  <h2 id="saved-not-found" *ngIf="noexercises">{{ SavedExercisesText }}</h2>
+  <div *ngIf="!noexercises">
+    <div class="search">
+      <label for="search">Search:</label>
+      <input
+        type="text"
+        placeholder="Search exercise"
+        (ngModelChange)="search()"
+        [(ngModel)]="searchInput"
+      />
+    </div>
+    <ul id="saved-data-list">
+      <div *ngFor="let exercise of exercises" id="li-div">
+        <li (click)="loadExercise(exercise.exercise)">
+          {{ exercise.exercise }}
+        </li>
+        <div id="edit-div">
+          <p
+            (click)="changeExercisePrivacy(exercise.exercise, exercise.public)"
+            style="border-left: 1px white solid"
+            id="edit"
+          >
+            {{ exercise.public }}
+          </p>
+
+          <p
+            (click)="editExercise(exercise.exercise)"
+            style="border-inline: 1px white solid"
+            id="edit"
+          >
+            Edit
+          </p>
+          <p
+            (click)="deleteExercise(exercise.exercise)"
+            style="border-right: 1px white solid"
+            id="delete"
+          >
+            Delete
+          </p>
+        </div>
+      </div>
+      <p *ngIf="!FoundExercises" style="text-align: center; cursor: default">
+        No results were found
+      </p>
+    </ul>
+  </div>
+</div>

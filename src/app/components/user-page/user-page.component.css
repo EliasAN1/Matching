@@ -1,0 +1,206 @@
+h1 {
+  color: wheat;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 1vw;
+}
+
+.Create-account-input-checkbox {
+  outline: 0px;
+}
+
+.wrraper {
+  display: block;
+}
+
+.block {
+  display: inline-flex;
+}
+
+.container {
+  width: 70vw;
+  color: white;
+  outline: 1vw white solid;
+
+  font-size: 1.2vw;
+  padding: 2.2vw;
+  margin: auto;
+  margin-top: 1.3vw;
+}
+.edit-img {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0px;
+  text-align: center;
+  font-size: 0.7vw;
+  margin-top: 0.5vh;
+}
+
+.info-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.show-edit {
+  display: block;
+}
+
+.friends-list {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  height: 30vh;
+  color: white;
+  outline: 0.2vw white solid;
+  font-size: 1.2vw;
+  padding: 2.2vw;
+  margin-top: 1.3vw;
+  overflow-y: auto;
+}
+
+.friends {
+  display: inline-flex;
+  justify-content: space-between;
+  margin-bottom: 1.2vw;
+}
+.friends :last-child {
+  margin: none;
+}
+
+.friends-Btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+  color: white;
+}
+
+.friends-Btn:hover p {
+  transition: 0.2s;
+  color: wheat;
+}
+
+.inner-block {
+  display: inline-flex;
+  align-items: center;
+}
+
+.inner-block p {
+  margin-right: 0.9vw;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  margin-left: 1.2vw;
+  font-size: 1.1vw;
+  font-weight: bold;
+}
+
+.hover-p {
+  color: white;
+  cursor: pointer;
+}
+.hover-p:hover {
+  transition: 0.2s;
+  color: wheat;
+}
+
+.friends-Btn img {
+  height: 2.96vw;
+  width: 2.96vw;
+}
+.friends-Btn p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1.2vw;
+
+  font-weight: bold;
+}
+
+.Btn-div {
+  display: flex;
+  margin: auto;
+  justify-content: space-around;
+}
+
+.Btn {
+  width: 17vw;
+  background-color: transparent;
+  color: white;
+  border: none;
+  outline: 2px black solid;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.Btn:hover {
+  outline-color: white;
+}
+
+@media only screen and (max-width: 760px) {
+  .container {
+    font-size: 4vw;
+  }
+  .info-div {
+    display: flex;
+    flex-direction: column;
+  }
+  .friends-list {
+    width: 66vw;
+    height: 20vh;
+    font-size: 2.5vw;
+  }
+  .friends-list p {
+    font-size: 3vw;
+  }
+  .friends-Btn img {
+    height: 7vw;
+    width: 7vw;
+  }
+  .Btn {
+    width: 50vw;
+    margin-bottom: 10px;
+  }
+}
+
+/* For webkit-based browsers */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: wheat;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  background-color: #fcfcfc;
+}
+
+/* For Firefox */
+::-moz-scrollbar {
+  display: none;
+}
+
+::-moz-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-moz-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+::-moz-scrollbar-button {
+  display: none;
+  background-color: #555;
+}

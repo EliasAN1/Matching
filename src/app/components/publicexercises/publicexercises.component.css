@@ -1,0 +1,107 @@
+h1 {
+  color: wheat;
+  text-align: center;
+}
+h2 {
+  color: white;
+  text-align: center;
+}
+
+label {
+  color: wheat;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+input {
+  padding: 5px;
+
+  width: 200px;
+  height: 10px;
+  font-size: 15px;
+
+  background-color: transparent;
+  color: white;
+
+  border: 0px;
+  outline: 2px black solid;
+
+  opacity: 0.7;
+  transition: 0.5s;
+}
+input::placeholder {
+  color: white;
+  text-align: center;
+}
+input:focus {
+  outline: 2px white solid;
+  opacity: 1;
+}
+
+.h4Btn {
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: inherit;
+  color: #f5deb3;
+  background-color: transparent;
+  border: 0px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.h4Btn:hover {
+  color: white;
+}
+
+#saved-data-list {
+  width: 70vw;
+}
+#saved-data-div {
+  display: block;
+  text-align: center;
+}
+
+#saved-data-div ul {
+  color: white;
+  outline: 2px white solid;
+  width: 70vw;
+  font-size: 20px;
+  min-width: 15vw;
+  padding: 30px;
+  margin: auto;
+  margin-top: 20px;
+}
+#li-div {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px white solid;
+  border-bottom: 2px white solid;
+  margin-top: 20px;
+}
+
+#saved-data-div ul :first-child {
+  margin-top: 0px;
+}
+
+#saved-data-div ul div li {
+  padding: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+  text-align: left;
+}
+#saved-data-div ul p {
+  text-align: right;
+  margin: 0px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#saved-data-div ul li:hover {
+  color: wheat;
+}
+
+@media only screen and (max-width: 760px) {
+  #saved-data-div ul {
+    width: fit-content;
+  }
+}

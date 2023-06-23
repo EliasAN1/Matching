@@ -1,0 +1,11 @@
+.alert {
+  position: absolute;
+  text-align: center;
+  width: 99.3vw;
+}
+@media only screen and (max-width: 760px) {
+  .alert {
+    text-align: center;
+    width: auto;
+  }
+}

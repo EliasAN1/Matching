@@ -1,0 +1,109 @@
+/* Nav bar */
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(63, 63, 63);
+  color: white;
+  opacity: 0.7;
+}
+.n0 {
+  color: white;
+  font-size: 17px;
+  padding: 10px;
+
+  text-align: left;
+  opacity: 0.7;
+}
+.n1 {
+  display: flex;
+  color: white;
+  font-size: 17px;
+  padding: 10px;
+  text-align: right;
+}
+
+.profile-container {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+.pointer-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+}
+
+.bar1,
+.bar2 {
+  width: 13px;
+  height: 5px;
+  background-color: white;
+  margin: 15px 0;
+  transition: 0.4s;
+}
+
+.opened .bar1 {
+  transform: translate(3.7px, 3px) rotate(45deg);
+}
+
+.opened .bar2 {
+  transform: translate(-3.7px, 3px) rotate(-45deg);
+}
+
+.profile-list-wrapper {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transition: 0.4s;
+}
+.show {
+  display: block;
+}
+
+.profile-list-container {
+  position: absolute;
+  background-color: white;
+  width: 200px;
+  padding: 10px;
+}
+
+.profile-list-container a {
+  display: block;
+  color: black;
+  opacity: 1;
+  text-align: left;
+}
+
+.a-link-nav {
+  color: white;
+  background-color: transparent;
+  border: 0px;
+  padding: 10px;
+  margin: auto;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.a-link-nav:hover {
+  opacity: 1;
+}
+
+.profile-list-container a:hover {
+  color: wheat;
+  opacity: 1;
+}
+.welcome {
+  color: white;
+  padding: 10px;
+  margin: auto;
+  opacity: 1;
+}
+
+.active {
+  color: wheat;
+  opacity: 1;
+  pointer-events: none;
+}
+/* Nav bar */

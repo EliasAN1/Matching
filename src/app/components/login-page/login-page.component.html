@@ -1,0 +1,62 @@
+<div class="container">
+  <h1 style="cursor: default">LOGIN</h1>
+
+  <div>
+    <div class="inputs">
+      <label for="user">User</label>
+      <input
+        #userin
+        id="user"
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        placeholder="Your username"
+      />
+    </div>
+
+    <div class="inputs">
+      <label for="password">Password</label>
+      <input
+        #passin
+        id="password"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Your password"
+      />
+    </div>
+    <div *ngIf="!remembered" class="remember-div">
+      <label for="remember">Remeber me</label>
+      <input
+        type="checkbox"
+        name="remember"
+        id="remember"
+        [(ngModel)]="remember"
+      />
+    </div>
+    <div *ngIf="remembered" class="remember-div">
+      <button
+        class="logBtn"
+        style="margin-top: 0px; width: fit-content; border: 0px; padding: 0px"
+        (click)="forgetme()"
+      >
+        Forget me
+      </button>
+    </div>
+  </div>
+  <div class="buttons">
+    <button (click)="login()" class="logBtn">{{ LoginBtnText }}</button>
+  </div>
+  <div class="footer">
+    <h4>
+      Not a user ?
+      <button (click)="navigate('/sign-up')" class="h4Btn">Sign up</button>
+    </h4>
+    <h4>
+      Forgot your infromation ?
+      <button class="h4Btn" (click)="navigate('/forgotten-pass')">
+        Recover
+      </button>
+    </h4>
+  </div>
+</div>

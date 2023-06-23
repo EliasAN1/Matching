@@ -1,0 +1,30 @@
+<div id="add-question-div">
+  <h1 style="cursor: default">EDITING {{ exercisename }}</h1>
+  <div #addQuestionFormDiv id="add-question-form-div">
+    <div *ngFor="let input of inputs">
+      <input
+        [(ngModel)]="input.question"
+        type="text"
+        class="question"
+        placeholder="Enter your quesiton"
+        autocomplete="off"
+      />
+      <input
+        [(ngModel)]="input.questionOrder"
+        type="text"
+        class="question-order"
+        placeholder="Enter the answer"
+        autocomplete="off"
+      />
+      <button id="remove-child" (click)="deleteInput(input)">-</button>
+    </div>
+  </div>
+
+  <div id="button-div">
+    <button class="btn" id="finish" (click)="finishAndSave()">
+      Save changes
+    </button>
+    <button class="btn" id="finish" (click)="finish()">Cancel</button>
+    <button class="btn" id="sumbit" (click)="addInput()">+</button>
+  </div>
+</div>

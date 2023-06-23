@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="text-div">
+    <h1>Matching questions</h1>
+    <h3>
+      Here you can create questions<br />
+      and practice for you exam
+    </h3>
+  </div>
+  <div class="button-div">
+    <button
+      id="create-new-questions"
+      *ngIf="loggedin == true"
+      (click)="changepass()"
+    >
+      Change password
+    </button>
+  </div>
+</div>

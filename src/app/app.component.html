@@ -1,0 +1,13 @@
+<router-outlet>
+  <app-navbar
+    *ngIf="currentRoute_ != '/admin' && isPhone === false"
+    currentRoute="{{ currentRoute_ }}"
+  ></app-navbar>
+  <app-phone-navbar
+    *ngIf="isPhone"
+    currentRoute="{{ currentRoute_ }}"
+  ></app-phone-navbar>
+  <div class="alert" *ngIf="displayalert == 'display'">
+    <app-custom-alert [alertType]="Type" [message]="message"></app-custom-alert>
+  </div>
+</router-outlet>

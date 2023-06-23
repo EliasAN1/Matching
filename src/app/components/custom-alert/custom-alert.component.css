@@ -1,0 +1,29 @@
+.alert {
+  display: inline-flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 430px;
+  cursor: default;
+}
+.alert p {
+  margin: 0px;
+  color: white;
+  text-align: left;
+}
+
+.close {
+  cursor: pointer;
+}
+
+.danger {
+  background-color: red;
+}
+.safe {
+  background-color: green;
+}
+
+@media only screen and (max-width: 760px) {
+  .alert {
+    width: 90vw;
+  }
+}
