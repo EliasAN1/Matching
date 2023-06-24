@@ -34,7 +34,7 @@ export class HomeComponent {
     }
   }
 
-  changepass() {
-    this.router.navigate(['/reset-pass']);
+  navigate() {
+    this.router.navigate(['/user']);
   }
 }

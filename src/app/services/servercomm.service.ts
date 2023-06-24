@@ -248,14 +248,6 @@ export class ServercommService {
       .toPromise();
   }
 
-  async friend_request(user: string, target: string): Promise<any> {
-    const data = { user: user, target: target };
-
-    return this.http
-      .post('http://127.0.0.1:5000/api/friend-request', data, httpOptions)
-      .toPromise();
-  }
-
   async uploadImage(image: any, username: string): Promise<any> {
     const formData = new FormData();
     formData.append('image', image, username);
@@ -268,6 +260,19 @@ export class ServercommService {
   async getProfileData(): Promise<any> {
     return this.http
       .get('http://127.0.0.1:5000/api/user', httpOptions)
+      .toPromise();
+  }
+
+  async getUsers(): Promise<any> {
+    return this.http
+      .get('http://127.0.0.1:5000/api/get-users', httpOptions)
+      .toPromise();
+  }
+
+  async FriendManagment(user: string[], state: string): Promise<any> {
+    const data = { user: user, state: state };
+    return this.http
+      .post('http://127.0.0.1:5000/api/manage-friend', data, httpOptions)
       .toPromise();
   }
 }

@@ -94,7 +94,7 @@ def register():
     db_con.execute("PRAGMA case_sensitive_like = 1")
 
     try:
-        db_cur.execute(f'CREATE TABLE i{user} (exercises TEXT, public BLOB, Friends, Pending_requests)')
+        db_cur.execute(f'CREATE TABLE i{user} (exercises TEXT, public BLOB, Friends, Pending_requests, Pending_acceptance)')
         db_con.commit()
     except sqlite3.OperationalError:
         db_con.close()
@@ -554,51 +554,51 @@ def updatepass():
     .wrapper {{
       height: 70vh;
     }}
-    
+
     .container {{
       background: rgb(63, 63, 63);
     }}
-    
+
     h1 {{
       text-align: center;
       color: wheat;
     }}
-    
+
     p {{
       color: white;
       font-size: 17px;
       padding: 20px;
     }}
-    
+
     #recovery-link {{
       text-decoration: none;
       color: wheat;
       padding: 2px;
       transition: 0.2s;
     }}
-    
+
     #code {{
       font-size: 20px;
       font-weight: bolder;
       color: wheat;
     }}
-    
+
     #expire {{
       color: red;
       font-size: 20px;
       text-align: center;
     }}
-    
+
     #cancel {{
       color: rgb(216, 0, 0);
       text-decoration: none;
       transition: 0.2s;
     }}
-    
+
     #cancel:hover {{
       color: red;
     }}
-    
+
     #recovery-link:hover {{
       color: white;
     }}
@@ -610,16 +610,16 @@ def updatepass():
 <div class="container">
   <h1>MATCHING QUESTIONS</h1>
   <p>Hello, we are happy that this email reached you. <br><br>
-    Please enter this code in the link provided below: <span id="code">{secret_pass_uh}</span></p> 
+    Please enter this code in the link provided below: <span id="code">{secret_pass_uh}</span></p>
     <p> This is a link: <a href="https://matching-c70d4.web.app/{splitted_email}" id="recovery-link">Recovery link</a> </p>
-    
+
     <p id="expire">The code will expire after 10 minutes!</p>
-    
-<p style="font-weight: bolder;">If it was not you who did this action please click 
+
+<p style="font-weight: bolder;">If it was not you who did this action please click
   <a href="https://matching-c70d4.web.app/{email.split("@")[0]}notme" id="cancel">Cancel recovery</a></p>
 </div>
 </div>
-    
+
 </body>
 
 </html>
@@ -746,12 +746,12 @@ def retrieve():
     <div class="container">
       <h1>MATCHING QUESTIONS</h1>
       <p>Hello, we are happy that this email reached you. <br><br>
-        Please enter this code in the link provided below: <span id="code">{secret_pass_uh}</span></p> 
+        Please enter this code in the link provided below: <span id="code">{secret_pass_uh}</span></p>
         <p> This is a link: <a href="https://matching-c70d4.web.app/{splitted_email}" id="recovery-link">Recovery link</a> </p>
 
         <p id="expire">The code will expire after 10 minutes!</p>
 
-    <p style="font-weight: bolder;">If it was not you who did this action please click 
+    <p style="font-weight: bolder;">If it was not you who did this action please click
       <a href="https://matching-c70d4.web.app/{email.split("@")[0]}notme" id="cancel">Cancel recovery</a></p>
     </div>
     </div>
@@ -932,9 +932,6 @@ def get_profile_data():
     return success(lists)
 
 
-@app.route('/api/friend-request', methods=['POST'])
-def friend_request():
-    return success('A friend request sent successfully!')
 
 @app.route('/api/upload-image', methods=['POST'])
 def upload_image():
@@ -959,12 +956,87 @@ def upload_image():
         image_url = data['data']['link']
         con = sqlite3.connect('users.db')
         cur = con.cursor()
+        cur.execute("PRAGMA case_sensitive_like = 1")
+
         cur.execute('UPDATE accounts SET image=? WHERE username=?', (image_url, image.filename))
         con.commit()
         con.close()
         return success(f'Image saved successfully : {image_url}')
     else:
         return failed_s('Error occured during request, please try again', 200)
+
+
+@app.route('/api/get-users', methods=['GET'])
+def get_users():
+    if 'username' not in session:
+        return success('Your session has ended please login again!')
+    users_con = sqlite3.connect('users.db')
+    users_cur = users_con.cursor()
+    users_cur.execute("PRAGMA case_sensitive_like = 1")
+    users_cur.execute('SELECT username, image FROM accounts')
+    users = users_cur.fetchall()
+    users_con.close()
+    db_con = sqlite3.connect('database.db')
+    db_cur = db_con.cursor()
+    db_cur.execute("PRAGMA case_sensitive_like = 1")
+    db_cur.execute(f"SELECT Friends FROM i{session['username']} WHERE Friends IS NOT NULL")
+    user_friends = db_cur.fetchall()
+    db_cur.execute(f"SELECT Pending_requests FROM i{session['username']} WHERE Pending_requests IS NOT NULL")
+    user_pr = db_cur.fetchall()
+    db_cur.execute(f"SELECT Pending_acceptance FROM i{session['username']} WHERE Pending_acceptance IS NOT NULL")
+    user_pa = db_cur.fetchall()
+    db_con.close()
+    data = [users, user_friends, user_pr, user_pa]
+
+    return success(data)
+
+@app.route('/api/manage-friend', methods=['POST'])
+def friend_manage():
+    if 'username' not in session:
+        return success('Your session has ended please login again!')
+    user_to_add = request.get_json()['user']
+    db_con = sqlite3.connect('database.db')
+    db_cur = db_con.cursor()
+    db_cur.execute("PRAGMA case_sensitive_like = 1")
+    if request.get_json()['state'] == 'reject':
+        db_cur.execute(f'UPDATE i{user_to_add[0]} SET Pending_requests=NULL WHERE Pending_requests=?', (session['username'],))
+        db_con.commit()
+        db_cur.execute(f'UPDATE i{session["username"]} SET Pending_acceptance=NULL WHERE Pending_acceptance=?', (user_to_add[0],))
+        db_con.commit()
+        return success('You have rejected this user successfully!')
+        pass
+    elif user_to_add[2] == 'not-related':
+        db_cur.execute(f'INSERT INTO i{user_to_add[0]} (Pending_acceptance) VALUES (?)', (session['username'],))
+        db_con.commit()
+        db_cur.execute(f'INSERT INTO i{session["username"]} (Pending_requests) VALUES (?)', (user_to_add[0],))
+        db_con.commit()
+        return success('You have sent a friend request to this user successfully!')
+    elif user_to_add[2] == 'requested':
+        db_cur.execute(f'UPDATE i{session["username"]} SET Pending_requests=NULL WHERE Pending_requests=?', (user_to_add[0],))
+        db_con.commit()
+        db_cur.execute(f'UPDATE i{user_to_add[0]} SET Pending_acceptance=NULL WHERE Pending_acceptance=?', (session['username'],))
+        db_con.commit()
+        return success('You have cancelled the request to this user successfully!')
+    elif user_to_add[2] == 'friend':
+        db_cur.execute(f'UPDATE i{user_to_add[0]} SET Friends=NULL WHERE Friends=?', (session['username'],))
+        db_con.commit()
+        db_cur.execute(f'UPDATE i{session["username"]} SET Friends=NULL WHERE Friends=?', (user_to_add[0],))
+        db_con.commit()
+        return success('You have removed this friend successfully!')
+    elif user_to_add[2] == 'pending-acceptance':
+        db_cur.execute(f'UPDATE i{user_to_add[0]} SET Pending_requests=NULL WHERE Pending_requests=?', (session['username'],))
+        db_con.commit()
+        db_cur.execute(f'UPDATE i{session["username"]} SET Pending_acceptance=NULL WHERE Pending_acceptance=?', (user_to_add[0],))
+        db_con.commit()
+        db_cur.execute(f'INSERT INTO i{user_to_add[0]} (Friends) VALUES (?)', (session['username'],))
+        db_con.commit()
+        db_cur.execute(f'INSERT INTO i{session["username"]} (Friends) VALUES (?)', (user_to_add[0],))
+        db_con.commit()
+        return success('You have accepted this friend successfully!')
+
+
+
+
 
 def failed_s(why, status=500):
     response = jsonify({'message': why})

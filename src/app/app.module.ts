@@ -22,6 +22,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { PublicexercisesComponent } from './components/publicexercises/publicexercises.component';
 import { PhoneNavbarComponent } from './components/phone-navbar/phone-navbar.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
+import { FriendsComponent } from './components/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
     PublicexercisesComponent,
     PhoneNavbarComponent,
     UserPageComponent,
+    FriendsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [ServercommService],

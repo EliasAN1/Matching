@@ -1,7 +1,8 @@
 .alert {
   position: absolute;
   text-align: center;
-  width: 99.3vw;
+  left: 50%;
+  transform: translate(-50%);
 }
 @media only screen and (max-width: 760px) {
   .alert {
