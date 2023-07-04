@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ServercommService } from 'src/app/services/servercomm.service';
 import { CustomAlertComponent } from '../custom-alert/custom-alert.component';
 import { filter } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-friends',
@@ -17,17 +18,31 @@ export class FriendsComponent {
   numberOfPendingAcceptance: string = '';
   boolOfPendingAcceptance: boolean = false;
   filtered: boolean = false;
+  requested: boolean = false;
+  processingUser: string = '';
 
   constructor(
     private servercomm: ServercommService,
-    private alertcomm: CustomAlertComponent
+    private alertcomm: CustomAlertComponent,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.getUsers();
+  }
+
+  navigate(url: string) {
+    console.log(url);
+
+    this.router.navigate([url]);
+  }
+
+  getUsers() {
     this.servercomm
       .getUsers()
       .then((response) => {
         response = response['message'];
+        console.log(response);
 
         if (response == 'Your session has ended please login again!') {
           this.alertcomm.updateAlert('danger', response, 5000);
@@ -36,12 +51,15 @@ export class FriendsComponent {
             (user: any) =>
               user[0] != this.servercomm.getLoggedInStatusasValue()[1]
           );
+
           this.users.forEach((user, i) => {
-            if (user[0] == response[1][i]) {
+            console.log(response);
+
+            if (response[1].includes(user[0])) {
               this.users.at(i)?.push('friend', `${i}`);
-            } else if (user[0] == response[2][i]) {
+            } else if (response[2].includes(user[0])) {
               this.users.at(i)?.push('requested', `${i}`);
-            } else if (user[0] == response[3][i]) {
+            } else if (response[3].includes(user[0])) {
               this.users.at(i)?.push('pending-acceptance', `${i}`);
             } else {
               this.users.at(i)?.push('not-related', `${i}`);
@@ -55,6 +73,7 @@ export class FriendsComponent {
               this.pendingAcceptance.length
             );
           }
+
           this.constantListOfUsers = this.users;
         }
       })
@@ -94,47 +113,82 @@ export class FriendsComponent {
     }
   }
 
-  visitProfile() {}
-
-  chat() {}
-
   FriendMangment(user: string[], state: string = 'accept') {
-    this.servercomm.FriendManagment(user, state).then((response) => {
-      response = response['message'];
-      if (response == 'Your session has ended please login again!') {
-        this.alertcomm.updateAlert('danger', response, 5000);
-      } else if (
-        response == 'You have sent a friend request to this user successfully!'
-      ) {
-        this.alertcomm.updateAlert('safe', response, 5000);
-        this.users[Number(user[3])][2] = 'requested';
-      } else if (response == 'You have removed this friend successfully!') {
-        this.alertcomm.updateAlert('safe', response, 5000);
-        this.users[Number(user[3])][2] = 'not-related';
-      } else if (response == 'You have rejected this user successfully!') {
-        this.alertcomm.updateAlert('safe', response, 5000);
-        this.users[Number(user[3])][2] = 'not-related';
-        this.pendingAcceptance = this.pendingAcceptance.filter(
-          (element) => element[0] != user[0]
-        );
-        this.numberOfPendingAcceptance = String(this.pendingAcceptance.length);
-        if (this.pendingAcceptance.length == 0) {
-          this.boolOfPendingAcceptance = false;
-        }
-        if (this.filtered) {
-          this.filtered = !this.filtered;
-          this.users = this.constantListOfUsers;
-        }
-      } else if (
-        response == 'You have cancelled the request to this user successfully!'
-      ) {
-        this.alertcomm.updateAlert('safe', response, 5000);
-        this.users[Number(user[3])][2] = 'not-related';
-      } else if (response == 'You have accepted this friend successfully!') {
-        this.alertcomm.updateAlert('safe', response, 5000);
-        this.users[Number(user[3])][2] = 'friend';
+    const innerFilter = () => {
+      this.pendingAcceptance = this.pendingAcceptance.filter(
+        (element) => element != user[0]
+      );
+
+      this.numberOfPendingAcceptance = String(this.pendingAcceptance.length);
+      if (this.pendingAcceptance.length == 0) {
+        this.boolOfPendingAcceptance = false;
       }
-    });
+
+      if (this.filtered) {
+        this.filtered = !this.filtered;
+        this.users = this.constantListOfUsers;
+      }
+    };
+    this.requested = true;
+    this.processingUser = user[0];
+
+    this.servercomm
+      .FriendManagment(user, state)
+      .then((response) => {
+        response = response['message'];
+        console.log(response);
+        this.requested = false;
+        this.processingUser = '';
+
+        if (response == 'Your session has ended please login again!') {
+          this.alertcomm.updateAlert('danger', response, 5000);
+          this.servercomm.checkLoggedInStatus();
+        } else if (
+          response ==
+          'You have sent a friend request to this user successfully!'
+        ) {
+          this.alertcomm.updateAlert('safe', response, 5000);
+          this.users[Number(user[3])][2] = 'requested';
+        } else if (response == 'You have removed this friend successfully!') {
+          this.alertcomm.updateAlert('safe', response, 5000);
+          this.users[Number(user[3])][2] = 'not-related';
+        } else if (response == 'You have blocked this user successfully!') {
+          this.alertcomm.updateAlert('safe', response, 5000);
+          this.users = this.users.filter((friend) => friend[0] != user[0]);
+        } else if (response == 'You have rejected this user successfully!') {
+          this.alertcomm.updateAlert('safe', response, 5000);
+          this.users[Number(user[3])][2] = 'not-related';
+          innerFilter();
+        } else if (
+          response ==
+          'You have cancelled the request to this user successfully!'
+        ) {
+          this.alertcomm.updateAlert('safe', response, 5000);
+          this.users[Number(user[3])][2] = 'not-related';
+        } else if (response == 'You have accepted this friend successfully!') {
+          this.alertcomm.updateAlert('safe', response, 5000);
+          this.users[Number(user[3])][2] = 'friend';
+          innerFilter();
+        } else if (response == 'Synchronization error') {
+          this.alertcomm.updateAlert(
+            'danger',
+            response + ' We have refreshed the page for you.',
+            5000
+          );
+          this.getUsers();
+        } else if (response == 'Looks like this request has been canceled') {
+          this.alertcomm.updateAlert(
+            'danger',
+            `Looks like ${user[0]} has cancelled his friend request before you accepted it`,
+            5000
+          );
+          this.users[Number(user[3])][2] = 'not-related';
+        }
+      })
+      .catch((err) => {
+        this.alertcomm.updateAlert('danger', 'Unknown error occured', 5000);
+        this.requested = false;
+      });
   }
   block() {}
 }

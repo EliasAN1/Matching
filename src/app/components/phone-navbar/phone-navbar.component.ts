@@ -11,10 +11,15 @@ import { CustomAlertComponent } from '../custom-alert/custom-alert.component';
 })
 export class PhoneNavbarComponent {
   @Input() currentRoute!: string;
+
   @ViewChild('hamicon') hamicon!: ElementRef;
   @ViewChild('pages') pages!: ElementRef;
   loggedin: boolean = false;
   username: string = '';
+  totalNoty: string = '';
+  friendsNoty: string = '';
+  msgNoty: string = '';
+
   private subscription!: Subscription;
 
   constructor(
@@ -29,6 +34,12 @@ export class PhoneNavbarComponent {
       .subscribe((value) => {
         this.loggedin = value[0];
         this.username = value[1];
+        this.friendsNoty = value[2];
+        this.msgNoty = value[3];
+        this.totalNoty = String(
+          Number(this.friendsNoty) + Number(this.msgNoty)
+        );
+        this.totalNoty == '0' ? (this.totalNoty = '') : '';
       });
   }
 

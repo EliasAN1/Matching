@@ -71,10 +71,6 @@ export class LoginPageComponent {
       this.progressValueSubscription.unsubscribe();
     }
   }
-  @HostListener('document:keyup.enter')
-  onEnterKey() {
-    this.login();
-  }
 
   navigate(link: string) {
     this.router.navigate([link]);
@@ -85,7 +81,7 @@ export class LoginPageComponent {
     this.username = '';
     this.remembered = false;
   }
-
+  @HostListener('document:keyup.enter')
   login() {
     const usernameinput = this.usernameinput.nativeElement;
     const passwordinput = this.passwordinput.nativeElement;

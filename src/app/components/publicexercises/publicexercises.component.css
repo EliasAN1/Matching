@@ -52,6 +52,9 @@ input:focus {
 .h4Btn:hover {
   color: white;
 }
+.user-p:hover {
+  color: wheat;
+}
 
 #saved-data-list {
   width: 70vw;

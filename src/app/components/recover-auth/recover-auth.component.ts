@@ -31,44 +31,47 @@ export class RecoverAuthComponent {
 
   ngOnInit(): void {
     const route = this.router.url.slice(1);
-    if (route.endsWith('notme')) {
-      this.servercomm
-        .notme(route.replace('notme', ''))
-        .then((response) => {
-          response = response['message'];
 
-          if (response == 'The recovery canceled successfully!') {
-            this.alertcom.updateAlert('safe', response, 5000);
-            this.router.navigate(['/']);
-          } else {
-            this.alertcom.updateAlert(
-              'danger',
-              'Something went wrong, contact us immediately!',
-              5000
-            );
-            this.router.navigate(['/']);
-          }
-        })
-        .catch((error) => {
-          this.alertcom.updateAlert('danger', 'Unknown error occured!', 5000);
-        });
-    } else {
-      this.servercomm
-        .checkPath(route)
-        .then((respone) => {
-          respone = respone['message'];
-          if (respone == 'No such recovery') {
-            this.router.navigate(['/']);
-            this.alertcom.updateAlert(
-              'danger',
-              'The route you are trying to access does not exists!',
-              5000
-            );
-          }
-        })
-        .catch((error) => {
-          this.alertcom.updateAlert('danger', 'Unknown error occured!', 5000);
-        });
+    if (!route.startsWith('user/')) {
+      if (route.endsWith('notme')) {
+        this.servercomm
+          .notme(route.replace('notme', ''))
+          .then((response) => {
+            response = response['message'];
+
+            if (response == 'The recovery canceled successfully!') {
+              this.alertcom.updateAlert('safe', response, 5000);
+              this.router.navigate(['/']);
+            } else {
+              this.alertcom.updateAlert(
+                'danger',
+                'Something went wrong, contact us immediately!',
+                5000
+              );
+              this.router.navigate(['/']);
+            }
+          })
+          .catch((error) => {
+            this.alertcom.updateAlert('danger', 'Unknown error occured!', 5000);
+          });
+      } else {
+        this.servercomm
+          .checkPath(route)
+          .then((respone) => {
+            respone = respone['message'];
+            if (respone == 'No such recovery') {
+              this.router.navigate(['/']);
+              this.alertcom.updateAlert(
+                'danger',
+                'The route you are trying to access does not exists!',
+                5000
+              );
+            }
+          })
+          .catch((error) => {
+            this.alertcom.updateAlert('danger', 'Unknown error occured!', 5000);
+          });
+      }
     }
   }
 

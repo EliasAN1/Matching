@@ -111,12 +111,13 @@ input:focus {
 
 #edit-div {
   display: flex;
+  flex-direction: row;
 }
 
-#delete:hover {
+.delete:hover {
   color: red;
 }
-#edit:hover {
+.edit:hover {
   color: cyan;
 }
 

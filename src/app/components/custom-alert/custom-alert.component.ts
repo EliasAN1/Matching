@@ -23,7 +23,7 @@ export class CustomAlertComponent {
 
   updateAlert(type_: string, message_: string, period_: number) {
     this.appcommp.alertswtich('display', type_, message_);
-    this.timeOut(period_);
+    period_ == Infinity ? '' : this.timeOut(period_);
   }
   Closealert() {
     this.appcommp.alertswtich('');

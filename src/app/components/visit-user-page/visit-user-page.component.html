@@ -1,0 +1,171 @@
+<div class="wrraper">
+  <div class="container">
+    <div class="block">
+      <div>
+        <img #image [src]="imageUrl" alt="" height="50px" width="50px" />
+      </div>
+    </div>
+    <div class="info-div">
+      <div>
+        <p>Username: {{ user }}</p>
+        <p>Registered: {{ Registered }}</p>
+        <p>Last login: {{ Lastlogin }}</p>
+      </div>
+      <div class="exercises-wrapper">
+        <div *ngIf="exercises.length > 0" class="exercises-container">
+          <h2 class="exercises-h2">Public exercises</h2>
+          <ul class="exercises-ul">
+            <li
+              *ngFor="let exercise of exercises"
+              class="exercises-li"
+              (click)="loadPublicExercise(exercise.exerciseName)"
+            >
+              {{ exercise.exerciseName }}
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="exercises.length == 0" class="exercises-container">
+          <h2 class="exercises-h2">No public exercises</h2>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <ul class="friends-list">
+        <p
+          *ngIf="friends.length > 0"
+          style="margin: 0px; margin-bottom: 20px; text-align: center"
+        >
+          Friends
+        </p>
+        <p
+          *ngIf="friends.length == 0"
+          style="margin: 0px; margin-bottom: 20px; text-align: center"
+        >
+          This user has no friends
+        </p>
+
+        <div class="friends" *ngFor="let friend of friends">
+          <div (click)="navigate('/user/' + friend[0])">
+            <button class="friends-Btn" style="cursor: pointer">
+              <div class="block">
+                <div class="inner-block">
+                  <img src="{{ friend[1] }}" />
+                  <p>{{ friend[0] }}</p>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <div *ngIf="requested && processingUser == friend[0]">
+            <p>Processing request...</p>
+          </div>
+          <div
+            class="inner-block"
+            *ngIf="
+              friend[0] != loggedUser &&
+              friend[2] == 'friend' &&
+              !requested &&
+              processingUser != friend[0]
+            "
+          >
+            <p class="hover-p" (click)="navigate('/chat/' + friend[0])">Chat</p>
+            <p class="hover-p" (click)="FriendMangment(friend)">Unfriend</p>
+            <p class="hover-p" (click)="FriendMangment(friend, 'block')">
+              Block
+            </p>
+          </div>
+          <div
+            class="inner-block"
+            *ngIf="
+              friend[0] != loggedUser &&
+              friend[2] == 'not-relatable' &&
+              !requested &&
+              processingUser != friend[0]
+            "
+          >
+            <p class="hover-p" (click)="FriendMangment(friend)">Add friend</p>
+            <p class="hover-p" (click)="FriendMangment(friend, 'block')">
+              Block
+            </p>
+          </div>
+          <div
+            class="inner-block"
+            *ngIf="
+              friend[0] != loggedUser &&
+              friend[2] == 'pending_request' &&
+              !requested &&
+              processingUser != friend[0]
+            "
+          >
+            <p class="hover-p" (click)="FriendMangment(friend)">Requested</p>
+            <p class="hover-p" (click)="FriendMangment(friend, 'block')">
+              Block
+            </p>
+          </div>
+          <div
+            class="inner-block"
+            *ngIf="
+              friend[0] != loggedUser &&
+              friend[2] == 'pending_acceptance' &&
+              !requested &&
+              processingUser != friend[0]
+            "
+          >
+            <p class="hover-p" (click)="FriendMangment(friend)">Accept</p>
+            <p class="hover-p" (click)="FriendMangment(friend, 'reject')">
+              Reject
+            </p>
+            <p class="hover-p" (click)="FriendMangment(friend, 'block')">
+              Block
+            </p>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div
+      class="Btn-div"
+      *ngIf="loggedin && stateWithTheLoggedUser == 'not-relatable'"
+    >
+      <button class="Btn" (click)="FriendMangment([], 'accept', true)">
+        Add friend
+      </button>
+      <button class="Btn" (click)="FriendMangment([], 'block', true)">
+        Block
+      </button>
+    </div>
+    <div class="Btn-div" *ngIf="loggedin && stateWithTheLoggedUser == 'friend'">
+      <button class="Btn" (click)="navigate('/chat/' + user)">Chat</button>
+      <button class="Btn" (click)="FriendMangment([], 'accept', true)">
+        Unfriend
+      </button>
+      <button class="Btn" (click)="FriendMangment([], 'block', true)">
+        Block
+      </button>
+    </div>
+    <div
+      class="Btn-div"
+      *ngIf="loggedin && stateWithTheLoggedUser == 'pending_request'"
+    >
+      <button class="Btn" (click)="FriendMangment([], 'accept', true)">
+        Requested
+      </button>
+      <button class="Btn">Block</button>
+    </div>
+    <div
+      class="Btn-div"
+      *ngIf="loggedin && stateWithTheLoggedUser == 'pending_acceptance'"
+    >
+      <button class="Btn" (click)="FriendMangment([], 'accept', true)">
+        Accept
+      </button>
+      <button class="Btn" (click)="FriendMangment([], 'reject', true)">
+        Reject
+      </button>
+
+      <button class="Btn" (click)="FriendMangment([], 'block', true)">
+        Block
+      </button>
+    </div>
+  </div>
+</div>

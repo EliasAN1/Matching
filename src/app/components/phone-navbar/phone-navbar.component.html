@@ -21,7 +21,18 @@
       Sign up
     </button>
   </div>
-  <div class="welcome" *ngIf="loggedin">Welcome {{ username }}</div>
+  <div style="display: flex">
+    <div class="welcome" *ngIf="loggedin">Welcome {{ username }}</div>
+
+    <div
+      class="notification-alert-div"
+      style="right: 50px; margin-top: 10px"
+      *ngIf="totalNoty"
+    >
+      <p>{{ totalNoty }}</p>
+    </div>
+  </div>
+
   <div #hamicon class="container" (click)="openNav()">
     <div class="bar1"></div>
     <div class="bar2"></div>
@@ -67,9 +78,45 @@
         </button>
       </div>
       <div>
-        <button class="a-link-nav butt" *ngIf="loggedin" (click)="logout()">
-          Logout
-        </button>
+        <div>
+          <button
+            class="a-link-nav butt"
+            *ngIf="loggedin"
+            (click)="navigate('/user')"
+          >
+            My account
+          </button>
+        </div>
+        <div style="display: flex">
+          <button
+            class="a-link-nav butt"
+            *ngIf="loggedin"
+            (click)="navigate('/friends')"
+          >
+            Friends
+          </button>
+          <div class="notification-alert-div" *ngIf="friendsNoty">
+            <p>{{ friendsNoty }}</p>
+          </div>
+        </div>
+
+        <div style="display: flex">
+          <button
+            class="a-link-nav butt"
+            *ngIf="loggedin"
+            (click)="navigate('/chat/s')"
+          >
+            Messages
+          </button>
+          <div class="notification-alert-div" *ngIf="msgNoty">
+            <p>{{ msgNoty }}</p>
+          </div>
+        </div>
+        <div>
+          <button class="a-link-nav butt" *ngIf="loggedin" (click)="logout()">
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -13,7 +13,12 @@ const httpOptions = {
 })
 export class ServercommService {
   constructor(private http: HttpClient) {}
-  loggedInStatus = new BehaviorSubject<[boolean, string]>([false, '']);
+  loggedInStatus = new BehaviorSubject<[boolean, string, string, string]>([
+    false,
+    '',
+    '',
+    '',
+  ]);
   logInOutinprogress = new BehaviorSubject<boolean>(false);
 
   async checkLoggedInStatus() {
@@ -23,9 +28,14 @@ export class ServercommService {
         (response: any) => {
           const message = response.message;
           if (message == 'Not logged in') {
-            return this.loggedInStatus.next([false, '']);
+            return this.loggedInStatus.next([false, '', '', '']);
           } else {
-            return this.loggedInStatus.next([true, message]);
+            return this.loggedInStatus.next([
+              true,
+              message[0],
+              message[1],
+              message[2],
+            ]);
           }
         },
         (error) => {}
@@ -263,6 +273,13 @@ export class ServercommService {
       .toPromise();
   }
 
+  async getVisitProfileData(user: string): Promise<any> {
+    const data = { user: user };
+    return this.http
+      .post('http://127.0.0.1:5000/api/visit-profile', data, httpOptions)
+      .toPromise();
+  }
+
   async getUsers(): Promise<any> {
     return this.http
       .get('http://127.0.0.1:5000/api/get-users', httpOptions)
@@ -273,6 +290,30 @@ export class ServercommService {
     const data = { user: user, state: state };
     return this.http
       .post('http://127.0.0.1:5000/api/manage-friend', data, httpOptions)
+      .toPromise();
+  }
+  async chat(): Promise<any> {
+    return this.http
+      .get('http://127.0.0.1:5000/api/chat', httpOptions)
+      .toPromise();
+  }
+  async sendMsg(msg: string, receiver: string): Promise<any> {
+    const data = { msg: msg, receiver: receiver };
+    return this.http
+      .post('http://127.0.0.1:5000/api/send-mess', data, httpOptions)
+      .toPromise();
+  }
+
+  async seen(userChattingWith: string): Promise<any> {
+    const data = { userThatSent: userChattingWith };
+    return this.http
+      .post('http://127.0.0.1:5000/api/seen', data, httpOptions)
+      .toPromise();
+  }
+
+  async updateChat(): Promise<any> {
+    return this.http
+      .get('http://127.0.0.1:5000/api/update-chat', httpOptions)
       .toPromise();
   }
 }

@@ -65,14 +65,44 @@
           <div class="bar1"></div>
           <div class="bar2"></div>
         </div>
-        <a class="welcome">Welcome {{ username }}</a>
+        <div style="display: flex">
+          <a class="welcome">Welcome {{ username }}</a>
+          <div
+            *ngIf="totalNoty"
+            style="
+              background-color: black;
+              width: 20px;
+              height: 20px;
+              opacity: 0.7;
+              text-align: center;
+              right: 10px;
+              margin-top: 10px;
+            "
+          >
+            <p style="margin: 0">{{ totalNoty }}</p>
+          </div>
+        </div>
       </div>
       <div #profileWrapper class="profile-list-wrapper">
         <div class="profile-list-container">
-          <a class="a-link-nav" (click)="navigate('/user')">My account</a>
-          <a class="a-link-nav" (click)="navigate('/friends')">Add Friends</a>
-          <a class="a-link-nav">Messages</a>
-          <a class="a-link-nav">Report to us</a>
+          <div (click)="navigate('/user')">
+            <a class="a-link-nav">My account</a>
+          </div>
+          <div style="display: flex" (click)="navigate('/friends')">
+            <a class="a-link-nav">Add Friends</a>
+            <div class="notification-alert-div" *ngIf="friendsNoty">
+              <p>{{ friendsNoty }}</p>
+            </div>
+          </div>
+          <div style="display: flex" (click)="navigate('/chat/s')">
+            <a class="a-link-nav">Messages</a>
+            <div class="notification-alert-div" *ngIf="msgNoty">
+              <p>{{ msgNoty }}</p>
+            </div>
+          </div>
+          <div>
+            <a class="a-link-nav">Report to us</a>
+          </div>
         </div>
       </div>
     </div>

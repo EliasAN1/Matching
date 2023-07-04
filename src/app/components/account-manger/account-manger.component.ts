@@ -51,6 +51,7 @@ export class AccountMangerComponent {
               'Your session has ended please login again!',
               5000
             );
+            this.servercomm.checkLoggedInStatus();
           } else if (response == 'You have entered a wrong password') {
             this.alertcom.updateAlert('danger', response, 5000);
             oldPasswordinput.style.outlineColor = 'red';

@@ -11,10 +11,13 @@ import { Subscription } from 'rxjs';
 export class AppComponent {
   title = 'Matching';
   currentRoute_: string = '';
+  friendsNoty: string = '';
+  msgNoty: string = '';
   displayalert: string = '';
   Type = '';
   message = '';
   isPhone = false;
+  authIterval: any;
   private routersubscription!: Subscription;
 
   constructor(private router: Router, private servercomm: ServercommService) {}
@@ -31,11 +34,17 @@ export class AppComponent {
       }
     });
     this.servercomm.checkLoggedInStatus();
+    this.authIterval = setInterval(() => {
+      this.servercomm.checkLoggedInStatus();
+    }, 60000);
   }
 
   ngOnDestroy(): void {
     if (this.routersubscription) {
       this.routersubscription.unsubscribe();
+    }
+    if (this.authIterval) {
+      clearInterval(this.authIterval);
     }
   }
   alertswtich(status: string, type: string = '', message: string = '') {

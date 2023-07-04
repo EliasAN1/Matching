@@ -23,6 +23,8 @@ import { PublicexercisesComponent } from './components/publicexercises/publicexe
 import { PhoneNavbarComponent } from './components/phone-navbar/phone-navbar.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { FriendsComponent } from './components/friends/friends.component';
+import { VisitUserPageComponent } from './components/visit-user-page/visit-user-page.component';
+import { ChattingComponent } from './components/chatting/chatting.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { FriendsComponent } from './components/friends/friends.component';
     PhoneNavbarComponent,
     UserPageComponent,
     FriendsComponent,
+    VisitUserPageComponent,
+    ChattingComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [ServercommService],

@@ -18,9 +18,16 @@
     </div>
     <ul id="saved-data-list">
       <div *ngFor="let publicExercise of publicExercises" id="li-div">
-        <li *ngIf="searchResultFound" (click)="loadExercise(publicExercise)">
-          {{ publicExercise.exerciseName }} - - - by {{ publicExercise.user }}
-        </li>
+        <div>
+          <li *ngIf="searchResultFound" (click)="loadExercise(publicExercise)">
+            {{ publicExercise.exerciseName }}
+          </li>
+        </div>
+        <div>
+          <p>
+            By: <span class="user-p">{{ publicExercise.user }}</span>
+          </p>
+        </div>
       </div>
       <p *ngIf="!searchResultFound" style="text-align: center; cursor: default">
         No results were found

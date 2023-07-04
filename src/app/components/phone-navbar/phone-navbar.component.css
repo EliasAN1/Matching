@@ -72,6 +72,21 @@
   border-top: 1px black solid;
 }
 
+.notification-alert-div {
+  background-color: black;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  opacity: 0.7;
+  text-align: center;
+  right: 10px;
+  margin-top: 8px;
+}
+.notification-alert-div p {
+  margin: 0;
+  color: wheat;
+}
+
 .welcome {
   color: wheat;
   font-size: 17px;

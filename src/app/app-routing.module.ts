@@ -14,6 +14,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { PublicexercisesComponent } from './components/publicexercises/publicexercises.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { FriendsComponent } from './components/friends/friends.component';
+import { VisitUserPageComponent } from './components/visit-user-page/visit-user-page.component';
+import { ChattingComponent } from './components/chatting/chatting.component';
 
 let routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,7 +26,9 @@ let routes: Routes = [
   { path: 'saved-exercises', component: SavedExercisesPageComponent },
   { path: 'public-exercises', component: PublicexercisesComponent },
   { path: 'user', component: UserPageComponent },
+  { path: 'user/:username', component: VisitUserPageComponent },
   { path: 'friends', component: FriendsComponent },
+  { path: 'chat/:username', component: ChattingComponent },
   { path: 'edit', component: EditExerciseComponent },
   { path: 'forgotten-pass', component: RetrievePassComponent },
   { path: 'reset-pass', component: AccountMangerComponent },

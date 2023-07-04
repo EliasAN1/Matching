@@ -41,57 +41,71 @@
         <div class="user-div" style="display: flex; flex-direction: row">
           <img src="{{ user[1] }}" alt="" height="50px" width="50px" />
           <div class="p-aligning">
-            <p (click)="visitProfile()">{{ user[0] }}</p>
+            <p (click)="navigate('/user/' + user[0])">{{ user[0] }}</p>
           </div>
         </div>
         <div id="edit-div">
-          <div
-            class="p-aligning"
-            style="border-inline: 1px white solid"
-            *ngIf="user[2] == 'not-related'"
-          >
-            <p (click)="FriendMangment(user)" id="edit">Add friend</p>
+          <div style="display: flex">
+            <div
+              class="p-aligning"
+              *ngIf="requested && processingUser == user[0]"
+            >
+              <p>Processing request...</p>
+            </div>
           </div>
+          <div style="display: flex" *ngIf="processingUser != user[0]">
+            <div
+              class="p-aligning"
+              style="border-inline: 1px white solid"
+              *ngIf="user[2] == 'not-related'"
+            >
+              <p (click)="FriendMangment(user)" class="edit">Add friend</p>
+            </div>
 
-          <div
-            class="p-aligning"
-            style="border-inline: 1px white solid"
-            *ngIf="user[2] == 'requested'"
-          >
-            <p (click)="FriendMangment(user)" id="delete">Requested</p>
-          </div>
-          <div
-            class="p-aligning"
-            style="border-inline: 1px white solid"
-            *ngIf="user[2] == 'pending-acceptance'"
-          >
-            <p (click)="FriendMangment(user)" id="edit">Accept</p>
-          </div>
-          <div
-            class="p-aligning"
-            style="border-right: 1px white solid"
-            *ngIf="user[2] == 'pending-acceptance'"
-          >
-            <p (click)="FriendMangment(user, 'reject')" id="delete">Reject</p>
-          </div>
+            <div
+              class="p-aligning"
+              style="border-inline: 1px white solid"
+              *ngIf="user[2] == 'requested'"
+            >
+              <p (click)="FriendMangment(user)" class="delete">Requested</p>
+            </div>
+            <div
+              class="p-aligning"
+              style="border-inline: 1px white solid"
+              *ngIf="user[2] == 'pending-acceptance'"
+            >
+              <p (click)="FriendMangment(user)" class="edit">Accept</p>
+            </div>
+            <div
+              class="p-aligning"
+              style="border-right: 1px white solid"
+              *ngIf="user[2] == 'pending-acceptance'"
+            >
+              <p (click)="FriendMangment(user, 'reject')" class="delete">
+                Reject
+              </p>
+            </div>
 
-          <div
-            class="p-aligning"
-            style="border-inline: 1px white solid"
-            *ngIf="user[2] == 'friend'"
-          >
-            <p (click)="chat()" id="edit">Chat</p>
-          </div>
-          <div
-            class="p-aligning"
-            style="border-right: 1px white solid"
-            *ngIf="user[2] == 'friend'"
-          >
-            <p (click)="FriendMangment(user)" id="delete">Unfriend</p>
-          </div>
+            <div
+              class="p-aligning"
+              style="border-inline: 1px white solid"
+              *ngIf="user[2] == 'friend'"
+            >
+              <p (click)="navigate('/chat/' + user[0])" class="edit">Chat</p>
+            </div>
+            <div
+              class="p-aligning"
+              style="border-right: 1px white solid"
+              *ngIf="user[2] == 'friend'"
+            >
+              <p (click)="FriendMangment(user)" class="delete">Unfriend</p>
+            </div>
 
-          <div class="p-aligning" style="border-right: 1px white solid">
-            <p (click)="block()" id="delete">Block</p>
+            <div class="p-aligning" style="border-right: 1px white solid">
+              <p (click)="FriendMangment(user, 'block')" class="delete">
+                Block
+              </p>
+            </div>
           </div>
         </div>
       </div>

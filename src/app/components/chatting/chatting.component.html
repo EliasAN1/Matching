@@ -1,0 +1,131 @@
+<div class="wrapper">
+  <div class="chats" *ngIf="(state == 'chats' && isPhone) || !isPhone">
+    <div
+      class="friend"
+      *ngFor="let chat of chats"
+      (click)="openConvesation(chat)"
+    >
+      <div class="img-user-mess">
+        <div>
+          <img
+            [src]="chat.image"
+            width="50vw"
+            height="50vw"
+            class="img-chats"
+          />
+        </div>
+        <div class="user-mess-chats">
+          <p class="user-chats">{{ chat.chattingWithUser }}</p>
+          <p class="mess-chats" *ngIf="chat.lastMsg">
+            {{
+              chat.lastMsgByWho +
+                ": " +
+                (chat.lastMsg.length > 30
+                  ? chat.lastMsg.slice(0, 30) + "..."
+                  : chat.lastMsg)
+            }}
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p class="time-chats">{{ chat.lastMsgTime.slice(11, -3) }}</p>
+
+        <div class="notifications-chats" *ngIf="chat.totalUnreadMessages > 0">
+          <p>{{ chat.totalUnreadMessages }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+  <!--  -->
+  <!--  -->
+
+  <div class="chat" *ngIf="(state == 'chat' && isPhone) || !isPhone">
+    <div class="chat-nav">
+      <div class="img-user-chat">
+        <div style="display: flex">
+          <div class="backButton-chat" *ngIf="isPhone" (click)="switchState()">
+            &#x25c0; Chats
+          </div>
+          <div
+            class="img-div-chat"
+            (click)="navigate('/user/' + currentChat.chattingWithUser)"
+          >
+            <img
+              [src]="currentChat.image"
+              width="30vw"
+              height="30vw"
+              class="img-chats"
+            />
+            <div>
+              <p id="currentUserChat">
+                {{ currentChat.chattingWithUser }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="nav-chat-right" style="display: flex">
+            <p *ngIf="updateCountDown > 0">
+              Updating in: {{ updateCountDown }}s
+            </p>
+            <p *ngIf="updateCountDown <= 0">Updating...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  -->
+    <!--  -->
+
+    <div class="chat-body">
+      <!-- Left -->
+      <div
+        *ngFor="let message of currentChat.messages"
+        class="{{ message[2] == loggedUser ? 'oblig-right' : '' }}"
+      >
+        <div class="message-wing">
+          <div>
+            <div
+              *ngIf="message[2] == currentChat.chattingWithUser"
+              id="upper-left"
+            ></div>
+
+            <div
+              id="lower-left"
+              *ngIf="message[2] == currentChat.chattingWithUser"
+            ></div>
+          </div>
+          <div>
+            <div
+              class="msg-body-{{
+                message[2] == currentChat.chattingWithUser ? 'left' : 'right'
+              }}"
+            >
+              <p style="margin: 0px; color: black">
+                {{ message[0] }}
+              </p>
+              <p class="time">{{ message[1].slice(0, -3) }}</p>
+            </div>
+          </div>
+          <div>
+            <div id="upper-right" *ngIf="message[2] == loggedUser"></div>
+            <div id="lower-right" *ngIf="message[2] == loggedUser"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  -->
+    <!--  -->
+    <div class="chat-footer">
+      <div class="chat-footer-inputs">
+        <input type="text" [(ngModel)]="messageInput" />
+        <button (click)="sendMsg()">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -161,10 +161,8 @@ export class CreateExerciseComponent {
               sessionStorage.setItem('exercise', JSON.stringify(this.myList));
               sessionStorage.setItem('tried-to-save', 'true');
               sessionStorage.setItem('came-back?', 'false');
-              await this.servercomm.checkLoggedInStatus();
-              setTimeout(() => {
-                this.router.navigate(['/login']);
-              }, 500);
+              this.servercomm.checkLoggedInStatus();
+              this.router.navigate(['/login']);
             }
           } catch (error) {
             this.SentARequest = false;

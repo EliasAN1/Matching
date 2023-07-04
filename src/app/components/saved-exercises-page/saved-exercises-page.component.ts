@@ -153,7 +153,8 @@ export class SavedExercisesPageComponent {
             }
           } else if (response == 'Your session has ended please login again!') {
             this.alertcom.updateAlert('danger', response, 5000);
-            this.router.navigate(['/']);
+            this.router.navigate(['/login']);
+            this.servercomm.checkLoggedInStatus();
           } else {
             this.alertcom.updateAlert(
               'danger',
@@ -211,6 +212,8 @@ export class SavedExercisesPageComponent {
                 state: exerciseA[2],
               });
             });
+
+            console.log(this.full_exercises);
 
             this.ConstExercisesName = this.exercises;
           } else {
